@@ -1,7 +1,31 @@
  #!/bin/bash
 DATA_LAKE_RG='sandbox-nl02330-005-rg'
 DATA_LAKE_LOCATION='westeurope'
-
+DATA_LAKE_SERVER_NAME='rcdx'
+DATA_LAKE_DATABASE_NAME='rcdxa'
+ADMIN_USERNAME='admin'
+ADMIN_PASSWD='root'
+## Create a logical server in the resource group
+az sql server create \
+ --name $DATA_LAKE_SERVER_NAME \
+ --resource-group $DATA_LAKE_RG \
+ --location $DATA_LAKE_LOCATION  \
+ --admin-user $ADMIN_USERNAME \
+ --admin-password $ADMIN_PASSWD
+## Create a database in the server 
+az sql db create \
+ --resource-group $DATA_LAKE_RG \
+ --server $DATA_LAKE_SERVER_NAME \
+ --name $DATA_LAKE_DATABASE_NAME \
+ --sample-name AdventureWorksLT \
+ --service-objective S0
+# Configure a firewall rule for the server
+az sql server firewall-rule create \
+ --resource-group $DATA_LAKE_RG \
+ --server $DATA_LAKE_SERVER_NAME \
+ -n AllowYourIp \
+ --start-ip-address 0.0.0.0 \
+ --end-ip-address 0.0.0.0
 #DATA_LAKE_STORAGE='rcdx3'
 # Create a new storage (ADLS Gen2) Account
 #az storage account create \
