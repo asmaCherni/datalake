@@ -43,4 +43,19 @@ az group deployment create \
  --name $DATA_LAKE_WORKFLOW \
  --resource-group $DATA_LAKE_RG \
  --template-file $ARM_LOCATION \
- --parameters $ARM_PROPS_LOCATION     
+ --parameters $ARM_PROPS_LOCATION    
+ DATA_LAKE_WORKFLOW_DB='rcdxtest'
+ARM_LOCATION_DB='arm/data_factory.json'
+ARM_PROPS_LOCATION_DB='../conf/datafactory_prop.json'
+# Create Azure Databricks 
+az group deployment create \
+ --name $DATA_LAKE_WORKFLOW_DB \
+        --resource-group $DATA_LAKE_RG \
+ --template-file $ARM_LOCATION_DB \
+ --parameters $ARM_PROPS_LOCATION_DB 
+ DATA_LAKE_DWH_NAME='rcdxtest'
+# Create a SQL Datawarehouse
+az sql dw create \
+ --resource-group $DATA_LAKE_RG \
+ --server $DATA_LAKE_SERVER_NAME \
+ --name $DATA_LAKE_DWH_NAME
