@@ -3,7 +3,7 @@ DATA_LAKE_RG='sandbox-nl02330-005-rg'
 DATA_LAKE_LOCATION='westeurope'
 DATA_LAKE_SERVER_NAME='rcdx'
 DATA_LAKE_DATABASE_NAME='rcdxa'
-ADMIN_USERNAME='asma'
+ADMIN_USERNAME='admindb'
 ADMIN_PASSWD='root'
 ## Create a logical server in the resource group
 az sql server create \
