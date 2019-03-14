@@ -46,7 +46,7 @@ az group deployment create \
  --parameters $ARM_PROPS_LOCATION    
  DATA_LAKE_WORKFLOW_DB='rcdxtest'
 ARM_LOCATION_DB='arm/data_factory.json'
-ARM_PROPS_LOCATION_DB='../conf/datafactory_prop.json'
+ARM_PROPS_LOCATION_DB='../conf/data_factory_prop.json'
 # Create Azure Databricks 
 az group deployment create \
  --name $DATA_LAKE_WORKFLOW_DB \
